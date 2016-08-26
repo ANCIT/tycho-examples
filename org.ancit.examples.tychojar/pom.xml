@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>tycho_jar</groupId>
+	<version>1.0.0-SNAPSHOT</version>
+	<artifactId>org.intalio.examples.tychojar</artifactId>
+	<packaging>eclipse-plugin</packaging>
+
+	<repositories>
+		<repository>
+			<id>juno</id>
+			<url>http://download.eclipse.org/releases/indigo</url>
+			<layout>p2</layout>
+		</repository>
+	</repositories>
+
+
+	<build>
+		<plugins>
+	<!-- 		<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources-1</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}/libs</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${licensePath}</directory>
+									<includes>
+										<include>license</include>
+									</includes>
+								</resource>
+							</resources>
+							<resources>
+								<resource>
+									<artifactItems>
+										<artifactItem>
+											<groupId>com.intalio.bpms.ajax</groupId>
+											<artifactId>intalioajax</artifactId>
+											<version>7.5.0-SNAPSHOT</version>
+											<type>zip</type>
+											<overWrite>true</overWrite>
+											<outputDirectory>${project.basedir}</outputDirectory>
+											<destFileName>optional-new-name.jar</destFileName>
+											<includes>**/*.class,**/*.xml</includes>
+											<excludes>**/*test.class</excludes>
+										</artifactItem>
+									</artifactItems>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin> -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>0.18.1</version>
+				<extensions>true</extensions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.9</version>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>junit</groupId>
+									<artifactId>junit</artifactId>
+									<version>3.8.1</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<!-- <outputDirectory>${project.build.directory}/alternateLocation</outputDirectory> -->
+									<outputDirectory>${project.basedir}/libs</outputDirectory>
+									<destFileName>junit.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+							<!-- <outputDirectory>${project.build.directory}/wars</outputDirectory> -->
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>
